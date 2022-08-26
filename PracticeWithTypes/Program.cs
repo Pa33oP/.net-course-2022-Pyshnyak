@@ -1,6 +1,5 @@
 ﻿using System;
 using Models;
-using BankService;
 
 namespace PractiseWithTypes
 {
