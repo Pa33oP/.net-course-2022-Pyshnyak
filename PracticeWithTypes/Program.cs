@@ -7,7 +7,6 @@ namespace PractiseWithTypes
     {
         static void Main(string[] args)
         {
-            //контракт
             Employee employee = new Employee();
             employee.Contract = "Контракт от 25.05.2021";
             Console.WriteLine(employee.Contract);
@@ -18,7 +17,6 @@ namespace PractiseWithTypes
             employee.Contract = UpdateEmployeeContract(employee.Contract);
             Console.WriteLine(employee.Contract);
 
-            //валюта
             Currency currency = new Currency();
             currency.Name = "Рубль ПМР";
             Console.WriteLine(currency.Name);
