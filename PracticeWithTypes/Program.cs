@@ -8,36 +8,35 @@ namespace PractiseWithTypes
         static void Main(string[] args)
         {
             Employee employee = new Employee();
-            employee.Contract = "Контракт от 25.05.2021";
-            Console.WriteLine(employee.Contract);
+            employee.FirstName = "Николай";
+            employee.SureName = "Николаев";
 
             WrongUpdateEmployeeContract(employee);
             Console.WriteLine(employee.Contract);
 
-            employee.Contract = UpdateEmployeeContract(employee.Contract);
+            employee.Contract = UpdateEmployeeContract(employee);
             Console.WriteLine(employee.Contract);
 
             Currency currency = new Currency();
             currency.Name = "Рубль ПМР";
-            Console.WriteLine(currency.Name);
 
             WrongUpdateCurrency(currency);
-            Console.WriteLine(currency.Name);
+            Console.WriteLine("Рубль ПМР конвертируем в " + currency.Name);
 
-            currency.Name = RightUpdateCurrency(currency.Name);
-            Console.WriteLine(currency.Name);
+            currency.Name = RightUpdateCurrency(currency);
+            Console.WriteLine("Рубль ПМР конвертируем в " + currency.Name);
 
             Console.ReadKey();
         }
 
         static void WrongUpdateEmployeeContract(Employee employee)
         {
-            employee.Contract = "Контракт от 25.05.2022";
+            employee.Contract = $"Новый контракт с { employee.FirstName } {employee.SureName} от 25.05.2022";
         }
 
-        static string UpdateEmployeeContract(string contract)
+        static string UpdateEmployeeContract(Employee employee)
         {
-            return "Контракт от 25.05.2022";
+            return employee.Contract = $"Новый контракт с { employee.FirstName } {employee.SureName} от 25.05.2023";
         }
 
         static void WrongUpdateCurrency(Currency currency)
@@ -45,9 +44,9 @@ namespace PractiseWithTypes
             currency.Name = "Рубль РФ";
         }
 
-        static string RightUpdateCurrency(string currencyName)
+        static string RightUpdateCurrency(Currency currency)
         {
-            return currencyName = "Рубль РФ";
+            return currency.Name = "Рубль РФ";
         }
     }
 }

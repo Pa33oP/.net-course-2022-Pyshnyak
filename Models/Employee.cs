@@ -1,8 +1,10 @@
-﻿namespace Models
+﻿using System;
+
+namespace Models
 {
     public class Employee : Person 
     {
         public string Contract { get; set; }
-        public double Salary { get; set; }
+        public int Salary { get; set; }
     }
 }
