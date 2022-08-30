@@ -20,13 +20,5 @@ namespace Services
             };
             return employee;
         }
-
-        public Employee UnworkingConvert(Client client)
-        {
-            var person = client;
-            var employee = new Employee();
-            employee = person;
-            return employee;
-        }
     }
 }
