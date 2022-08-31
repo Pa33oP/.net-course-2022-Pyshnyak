@@ -31,9 +31,8 @@ namespace PracticeWithListAndDictionary
             Console.WriteLine("Время поиска струдника по номеру телефона в словаре: " + sw.ElapsedTicks);
             sw.Reset();
 
-            //GetClientsAge(clientsList);
+            GetClientsAge(clientsList);
 
-            //EmployeeDataList(employeesList);
             GetMinimumSalary(employeesList);
 
             Console.ReadKey();
@@ -41,39 +40,41 @@ namespace PracticeWithListAndDictionary
 
         static void GetClientNumberFromList(List<Client> clients)
         {
-            foreach (var number in clients)
-                if (number.PhoneNumber == 3)
-                {
-                    clients.FirstOrDefault(number => number.PhoneNumber == 3);
-                    Console.WriteLine("Сотрудник с номером 3: " + number.FirstName);
-                }
+            var client = clients.FirstOrDefault(number => number.PhoneNumber == 777111);
+            Console.WriteLine($"Клинт с номером телефона 777111: {client.FirstName} {client.SureName}");
         }
 
         static void GetClientNumberFromDictionary(Dictionary<int, Client> clients)
         {
-            clients.GetValueOrDefault(5);
+            Console.WriteLine();
+            var client = clients.FirstOrDefault(number => number.Key.Equals(777222));
+            Console.WriteLine($"Клиент с номером телефона 777222: {client.Value.FirstName} {client.Value.SureName}");
         }
 
-        //static void GetClientsAge(List<Client> clients)
-        //{
-        //    Console.WriteLine("Сотрудники родившиеся после 1 января 1995 года:");
-        //    DateTime start = new DateTime(1995, 01, 01);
-        //    var selectedPeople = from p in clients // передаем каждый элемент из people в переменную p
-        //                         where p.Date.Year > 1995 //фильтрация по критерию
-        //                         select p;
-        //    foreach (var client in selectedPeople)
-        //        Console.WriteLine(client.Date + client.FirstName);
-        //    //var selectedPeople = clients.FindAll(client => client.Date.Year < 1995);
-        //    //foreach (var client in selectedPeople)
-        //    //    Console.WriteLine(client.Date + client.FirstName);
-        //}
+        static void GetClientsAge(List<Client> clients)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Клиенты младше 30ти лет:");
+            DateTime start = new DateTime(1995, 01, 01);
+            var selectedClients = from c in clients
+                                  where DateTime.Today.Year - c.Date.Year < 30
+                                  select c;
+            foreach (var client in selectedClients)
+                Console.WriteLine($"Имя Фамилия: {client.FirstName} {client.SureName} Возраст: " + (DateTime.Today.Year - client.Date.Year));
+
+            //Console.WriteLine("Клиенты младше 30ти лет:");
+            //var selectedPeople = clients.FindAll(client => DateTime.Today.Year - client.Date.Year < 30);
+            //foreach (var client in selectedPeople)
+            //    Console.WriteLine($"Имя Фамилия: {client.FirstName} {client.SureName} Возраст: " + (DateTime.Today.Year - client.Date.Year));
+        }
 
         static void GetMinimumSalary(List<Employee> employees)
         {
+            Console.WriteLine();
             var minSalary = employees.Min(employee => employee.Salary);
             var persons = employees.FindAll(employee => employee.Salary == minSalary);
             foreach (var person in persons)
-                Console.WriteLine("Минимальная зарплата: " + person.Salary + " у сотрудника " + person.FirstName);
+                Console.WriteLine($"Минимальная зарплата: {person.Salary} у сотрудника {person.FirstName} {person.SureName}");
         }
     }
 }
