@@ -22,11 +22,11 @@ namespace PracticeWithListAndDictionary
             Console.WriteLine("Клиенты младше 30ти лет:");
             program.ClientsAge(clientsList);
 
-            
-            
             program.ClientNumberFromList(clientsList);
 
-            program.ClientNumberFromDictionary(clientsDictionary);
+            program.ClientNumberFromDictionaryWithKey(clientsDictionary);
+            
+            program.ClientNumberFromDictionaryWithFirstOrDefault(clientsDictionary);
 
             program.MinimalSalary(employeesList);
 
@@ -39,18 +39,28 @@ namespace PracticeWithListAndDictionary
             sw.Start();
             var client = clients.FirstOrDefault(number => number.PhoneNumber == numberPhone);
             sw.Stop();
-            Console.WriteLine($"Клиент с номером телефона {numberPhone}: {client.FirstName} {client.SureName} \n " +
-                $"Найден в списке за {sw.ElapsedTicks} тиков");
+            Console.WriteLine($"Клиент с номером телефона {numberPhone}: {client.FirstName} {client.SureName} найден в списке.\n" +
+                $"Время: {sw.ElapsedTicks}");
         }
 
-        public void ClientNumberFromDictionary(Dictionary<string, Client> clients)
+        public void ClientNumberFromDictionaryWithKey(Dictionary<string, Client> clients)
         {
-            var numberPhone = clients.First();
+            var numberPhone = clients.Last();
             sw.Start();
             var client = clients[numberPhone.Key];
             sw.Stop();
-            Console.WriteLine($"Клиент с номером телефона {numberPhone.Value.PhoneNumber}: {client.FirstName} {client.SureName} \n " +
-                $"Найден в словаре за {sw.ElapsedTicks} тиков");
+            Console.WriteLine($"Клиент с номером телефона {numberPhone.Value.PhoneNumber}: {client.FirstName} {client.SureName} найден в словаре по ключу.\n" +
+                $"Время: {sw.ElapsedTicks}");
+        }
+
+        public void ClientNumberFromDictionaryWithFirstOrDefault(Dictionary<string, Client> clients)
+        {
+            var numberPhone = clients.Last().Key;
+            sw.Start();
+            var client = clients.FirstOrDefault(number => number.Key.Equals(numberPhone));
+            sw.Stop();
+            Console.WriteLine($"Клиент с номером телефона {client.Key}: {client.Value.FirstName} {client.Value.SureName} найден в словаре" +
+                $"при помощи FirstOrDefault. Время: {sw.ElapsedTicks}");
         }
 
         public void ClientsAge(List<Client> clients)
