@@ -55,17 +55,9 @@ namespace PracticeWithListAndDictionary
         {
             Console.WriteLine();
             Console.WriteLine("Клиенты младше 30ти лет:");
-            DateTime start = new DateTime(1995, 01, 01);
-            var selectedClients = from c in clients
-                                  where DateTime.Today.Year - c.Date.Year < 30
-                                  select c;
-            foreach (var client in selectedClients)
+            var selectedPeople = clients.FindAll(client => DateTime.Today.Year - client.Date.Year < 30);
+            foreach (var client in selectedPeople)
                 Console.WriteLine($"Имя Фамилия: {client.FirstName} {client.SureName} Возраст: " + (DateTime.Today.Year - client.Date.Year));
-
-            //Console.WriteLine("Клиенты младше 30ти лет:");
-            //var selectedPeople = clients.FindAll(client => DateTime.Today.Year - client.Date.Year < 30);
-            //foreach (var client in selectedPeople)
-            //    Console.WriteLine($"Имя Фамилия: {client.FirstName} {client.SureName} Возраст: " + (DateTime.Today.Year - client.Date.Year));
         }
 
         static void GetMinimumSalary(List<Employee> employees)
