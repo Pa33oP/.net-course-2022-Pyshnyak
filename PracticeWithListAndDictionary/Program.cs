@@ -9,64 +9,63 @@ namespace PracticeWithListAndDictionary
 {
     class Program
     {
+        public Stopwatch sw = new Stopwatch();
         static void Main(string[] args)
         {
             TestDataGenerator testDataGenerator = new TestDataGenerator();
 
-            var clientsList = testDataGenerator.ClientsDataList();
-            var clientsDictionary = testDataGenerator.ClientDataDictionary();
-            var employeesList = testDataGenerator.EmployeeDataList();
+            var program = new Program();
+            var clientsList = testDataGenerator.GenerateClientList();
+            var clientsDictionary = testDataGenerator.GenerateClientDictionary();
+            var employeesList = testDataGenerator.GenerateEmployeeList();
 
-            var sw = new Stopwatch();
+            Console.WriteLine("Клиенты младше 30ти лет:");
+            program.ClientsAge(clientsList);
 
-            sw.Start();
-            GetClientNumberFromList(clientsList);
-            sw.Stop();
-            Console.WriteLine("Время поиска струдника по номеру телефона в списке: " + sw.ElapsedTicks);
-            sw.Reset();
+            
+            
+            program.ClientNumberFromList(clientsList);
 
-            sw.Start();
-            GetClientNumberFromDictionary(clientsDictionary);
-            sw.Stop();
-            Console.WriteLine("Время поиска струдника по номеру телефона в словаре: " + sw.ElapsedTicks);
-            sw.Reset();
+            program.ClientNumberFromDictionary(clientsDictionary);
 
-            GetClientsAge(clientsList);
-
-            GetMinimumSalary(employeesList);
+            program.MinimalSalary(employeesList);
 
             Console.ReadKey();
         }
 
-        static void GetClientNumberFromList(List<Client> clients)
+        public void ClientNumberFromList(List<Client> clients)
         {
-            var client = clients.FirstOrDefault(number => number.PhoneNumber == 777111);
-            Console.WriteLine($"Клинт с номером телефона 777111: {client.FirstName} {client.SureName}");
+            var numberPhone = clients.First().PhoneNumber;
+            sw.Start();
+            var client = clients.FirstOrDefault(number => number.PhoneNumber == numberPhone);
+            sw.Stop();
+            Console.WriteLine($"Клиент с номером телефона {numberPhone}: {client.FirstName} {client.SureName} \n " +
+                $"Найден в списке за {sw.ElapsedTicks} тиков");
         }
 
-        static void GetClientNumberFromDictionary(Dictionary<int, Client> clients)
+        public void ClientNumberFromDictionary(Dictionary<string, Client> clients)
         {
-            Console.WriteLine();
-            var client = clients.FirstOrDefault(number => number.Key.Equals(777222));
-            Console.WriteLine($"Клиент с номером телефона 777222: {client.Value.FirstName} {client.Value.SureName}");
+            var numberPhone = clients.First();
+            sw.Start();
+            var client = clients[numberPhone.Key];
+            sw.Stop();
+            Console.WriteLine($"Клиент с номером телефона {numberPhone.Value.PhoneNumber}: {client.FirstName} {client.SureName} \n " +
+                $"Найден в словаре за {sw.ElapsedTicks} тиков");
         }
 
-        static void GetClientsAge(List<Client> clients)
+        public void ClientsAge(List<Client> clients)
         {
-            Console.WriteLine();
-            Console.WriteLine("Клиенты младше 30ти лет:");
             var selectedPeople = clients.FindAll(client => DateTime.Today.Year - client.Date.Year < 30);
             foreach (var client in selectedPeople)
                 Console.WriteLine($"Имя Фамилия: {client.FirstName} {client.SureName} Возраст: " + (DateTime.Today.Year - client.Date.Year));
         }
 
-        static void GetMinimumSalary(List<Employee> employees)
+        public void MinimalSalary(List<Employee> employees)
         {
-            Console.WriteLine();
             var minSalary = employees.Min(employee => employee.Salary);
             var persons = employees.FindAll(employee => employee.Salary == minSalary);
             foreach (var person in persons)
-                Console.WriteLine($"Минимальная зарплата: {person.Salary} у сотрудника {person.FirstName} {person.SureName}");
+                Console.WriteLine($"Минимальная зарплата: {person.Salary} у сотрудника {person.FirstName} {person.SureName}\n");
         }
     }
 }
