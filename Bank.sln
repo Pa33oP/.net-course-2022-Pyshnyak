@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeWithTypes", "Practi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "BankService\Services.csproj", "{FE05DABF-58B6-431A-9550-8976C7E30A87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeWithListAndDictionary", "PracticeWithListAndDictionary\PracticeWithListAndDictionary.csproj", "{9BAB1B05-213D-4086-8F82-40D68DFED5C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FE05DABF-58B6-431A-9550-8976C7E30A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE05DABF-58B6-431A-9550-8976C7E30A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE05DABF-58B6-431A-9550-8976C7E30A87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BAB1B05-213D-4086-8F82-40D68DFED5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BAB1B05-213D-4086-8F82-40D68DFED5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BAB1B05-213D-4086-8F82-40D68DFED5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BAB1B05-213D-4086-8F82-40D68DFED5C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{A6FCB77C-ABD8-4F6E-9AD1-8D153C1C060C} = {2DAB60D7-5A6B-4CEC-A89D-2D0EA563B334}
 		{90014B82-61D0-4646-814F-6E7B98CD5D67} = {BCDD88E8-992E-4798-A26E-12FB1F55E5A5}
 		{FE05DABF-58B6-431A-9550-8976C7E30A87} = {2DAB60D7-5A6B-4CEC-A89D-2D0EA563B334}
+		{9BAB1B05-213D-4086-8F82-40D68DFED5C0} = {BCDD88E8-992E-4798-A26E-12FB1F55E5A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0097849E-39FC-49C1-B05C-98D472240A58}

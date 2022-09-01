@@ -7,5 +7,6 @@ namespace Models
         public string SureName { get; set; }
         public int PassportId { get; set; }
         public DateTime Date { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
