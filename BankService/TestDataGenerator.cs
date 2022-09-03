@@ -42,5 +42,56 @@ namespace Services
         {
             return fakeEmployees.Generate(1000);
         }
+
+        //Создание словаря "Клиент - счёт"
+        public Dictionary<Client, Account> GenerateClientAccount()
+        {
+            var clientAccountDictionary = new Dictionary<Client, Account>();
+            var currency = new Currency() { Name = "USD", Code = 446672 };
+            Random random = new Random();
+            
+            for (int i = 0; i < 5; i++)
+            {
+                var client = fakeClients.Generate();
+                clientAccountDictionary.Add(client, new Account
+                {
+                    Amount = random.Next(100000,500000),
+                    Currency = currency
+                });
+            }
+
+            return clientAccountDictionary;
+        }
+
+        //Создание словаря "Клиент - список счетов"
+        public Dictionary<Client, List<Account>> GenerateClientAccounts()
+        {
+            var clientAccountsDictionary = new Dictionary<Client, List<Account>>();
+            string[] currencyNames = { "USD", "RUB", "MDL" };
+
+            Random random = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                var listAccount = new List<Account>();
+                var client = fakeClients.Generate();
+                for (int j = 0; j < random.Next(1, 3); j++)
+                {
+                    var currencyName = currencyNames[random.Next(0,currencyNames.Length)];
+                    var account = new Account() 
+                    { 
+                        Amount = random.Next(100000,500000),
+                        Currency = new Currency 
+                        { 
+                        Name = currencyName, 
+                        Code = random.Next(1111,1113)
+                        } 
+                    };
+                    listAccount.Add(account);
+                }
+                clientAccountsDictionary.Add(client, listAccount);
+            }
+
+            return clientAccountsDictionary;
+        }
     }
 }
