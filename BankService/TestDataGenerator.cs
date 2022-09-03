@@ -76,14 +76,14 @@ namespace Services
                 var client = fakeClients.Generate();
                 for (int j = 0; j < random.Next(1, 3); j++)
                 {
-                    var currencyName = currencyNames[random.Next(0,currencyNames.Length)];
+                    
                     var account = new Account() 
                     { 
                         Amount = random.Next(100000,500000),
                         Currency = new Currency 
                         { 
-                        Name = currencyName, 
-                        Code = random.Next(1111,1113)
+                            Name = currencyNames[random.Next(0, currencyNames.Length)], 
+                            Code = random.Next(1111,1113)
                         } 
                     };
                     listAccount.Add(account);

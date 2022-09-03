@@ -31,7 +31,7 @@ namespace Sevices.Tests
         }
 
         [Fact]
-        public void GetHashCodeNecessityPositivTest2()
+        public void GetHashCodeNecessityPositivTestEmployee()
         {
             //Arrange
             TestDataGenerator testDataGenerator = new TestDataGenerator();
@@ -47,7 +47,7 @@ namespace Sevices.Tests
             };
 
             //Act
-            var employees = employeeList[1];
+            var employee = employeeList.Contains(newEmployee);
 
             //Assert
             Assert.Equal(oldEmployee, newEmployee);

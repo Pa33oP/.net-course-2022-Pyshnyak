@@ -21,9 +21,6 @@ namespace Models
             employee.Salary == Salary;
         }
 
-        public override int GetHashCode()
-        {
-            return PassportId.GetHashCode() + Salary.GetHashCode();
-        }
+
     }
 }
