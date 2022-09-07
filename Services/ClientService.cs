@@ -7,9 +7,9 @@ namespace Services
 {
     public class ClientService
     {
-        private Dictionary<Client, List<Account>> clients = new Dictionary<Client, List<Account>>();
+        private Dictionary<Client, List<Account>> _clients = new Dictionary<Client, List<Account>>();
         
-        public void AddClientToDictionary(Client client)
+        public void AddClient(Client client)
         {
             var listAccount = new List<Account>();
             var newAccount = new Account()
@@ -26,7 +26,7 @@ namespace Services
             if (client.PassportId == 0)
                 throw new PassportIdException("У предполагаемого владельца счёта нет паспорта!");
 
-            clients.Add(client, listAccount);
+            _clients.Add(client, listAccount);
         }
     }
 }

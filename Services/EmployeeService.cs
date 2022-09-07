@@ -7,9 +7,9 @@ namespace Services
 {
     public class EmployeeService
     {
-        private List<Employee> employees = new List<Employee>(); 
+        private List<Employee> _employees = new List<Employee>(); 
         
-        public void AddEmployeeToList(Employee employee)
+        public void AddEmployee(Employee employee)
         {
             if (employee.Date.Year > 2004)
                 throw new AgeLimitException("Кандидату на работу нет 18ти лет!");
@@ -17,7 +17,7 @@ namespace Services
             if (employee.PassportId == 0)
                 throw new PassportIdException("У кандидата на работу нет паспорта!");
 
-            employees.Add(employee);
+            _employees.Add(employee);
         }
     }
 }

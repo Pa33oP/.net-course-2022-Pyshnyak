@@ -3,14 +3,13 @@ using Services.Exceptions;
 using Services;
 using Models;
 using System;
-using System.Collections.Generic;
 
 namespace ServiceTests
 {
     public class ClientServiceTests
     {
         [Fact]
-        public void TestWithClientAccountAgeExceptions()
+        public void ClientAgeExceptionsTest()
         {
             //Arrange
             var clientService = new ClientService();
@@ -28,11 +27,11 @@ namespace ServiceTests
             
             //Act
             //Assert
-            Assert.Throws<AgeLimitException>(() => clientService.AddClientToDictionary(client));
+            Assert.Throws<AgeLimitException>(() => clientService.AddClient(client));
         }
 
         [Fact]
-        public void TestWithClientAccountPassportExceptions()
+        public void ClientPassportExceptionsTest()
         {
             //Arrange
             var clientService = new ClientService();
@@ -50,7 +49,7 @@ namespace ServiceTests
 
             //Act
             //Assert
-            Assert.Throws<PassportIdException>(() => clientService.AddClientToDictionary(client));
+            Assert.Throws<PassportIdException>(() => clientService.AddClient(client));
         }
     }
 }

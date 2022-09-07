@@ -1,6 +1,6 @@
 ﻿using Xunit;
-using Services.Exceptions;
 using Services;
+using Services.Exceptions;
 using Models;
 using System;
 
@@ -9,7 +9,7 @@ namespace ServiceTests
     public class EmployeeServiceTests
     {
         [Fact]
-        public void TestWithEmployeeAgeExceptions()
+        public void EmployeeAgeExceptionsTest()
         {
             //Arrange
             EmployeeService employeeService = new EmployeeService();
@@ -27,11 +27,11 @@ namespace ServiceTests
 
             //Act
             //Assert
-            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployeeToList(employee));
+            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployee(employee));
         }
 
         [Fact]
-        public void TestWithEmployeePassportExceptions()
+        public void EmployeePassportExceptionsTest()
         {
             //Arrange
             EmployeeService employeeService = new EmployeeService();
@@ -49,7 +49,7 @@ namespace ServiceTests
 
             //Act
             //Assert
-            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployeeToList(employee));
+            Assert.Throws<PassportIdException>(() => employeeService.AddEmployee(employee));
         }
     }
 }
