@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "BankService\Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeWithListAndDictionary", "PracticeWithListAndDictionary\PracticeWithListAndDictionary.csproj", "{9BAB1B05-213D-4086-8F82-40D68DFED5C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceTests", "ServiceTests\ServiceTests.csproj", "{5762B2F0-C5CB-4475-835F-E1672E6E4F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesTests", "ServiceTests\ServicesTests.csproj", "{5762B2F0-C5CB-4475-835F-E1672E6E4F0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

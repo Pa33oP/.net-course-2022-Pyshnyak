@@ -6,7 +6,7 @@ using System;
 
 namespace ServiceTests
 {
-    public class ExceptionEmployeeTest
+    public class EmployeeServiceTests
     {
         [Fact]
         public void TestWithEmployeeAgeExceptions()
@@ -27,7 +27,7 @@ namespace ServiceTests
 
             //Act
             //Assert
-            Assert.Throws<AgeLimitException>(() => employeeService.AddingEmployeeToList(employeeList, employee));
+            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployeeToList(employee));
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace ServiceTests
 
             //Act
             //Assert
-            Assert.Throws<AgeLimitException>(() => employeeService.AddingEmployeeToList(employeeList, employee));
+            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployeeToList(employee));
         }
     }
 }
