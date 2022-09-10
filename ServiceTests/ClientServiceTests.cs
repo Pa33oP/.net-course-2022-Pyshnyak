@@ -68,12 +68,12 @@ namespace ServiceTests
             }
 
             var youngestClientDate = clientService.GetClients().Max(u => u.Key.Date);
-            var youngestClient = clientService.GetClients().Equals(youngestClientDate);
+            int youngestClientAge = DateTime.Now.Year - youngestClientDate.Year;
 
             var oldestClientDate = clientService.GetClients().Min(u => u.Key.Date);
-            var oldestClient = clientService.Equals(oldestClientDate);
+            int oldestClientAge = DateTime.Now.Year - oldestClientDate.Year;
 
-            Assert.Equal(oldestClient, youngestClient);
+            Assert.Equal(oldestClientAge, youngestClientAge);
         }
 
         [Fact]

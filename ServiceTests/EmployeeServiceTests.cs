@@ -68,12 +68,12 @@ namespace ServiceTests
             }
 
             var youngestEmployeeDate = employeeService.GetEmployees().Max(u => u.Date);
-            var youngestEmployee = employeeService.Equals(youngestEmployeeDate);
+            int youngestEmployeeAge = DateTime.Now.Year - youngestEmployeeDate.Year;
 
             var oldestEmployeeDate = employeeService.GetEmployees().Min(u => u.Date);
-            var oldestEmployee = employeeService.Equals(oldestEmployeeDate);
+            int oldestEmployeeAge = DateTime.Now.Year - oldestEmployeeDate.Year;
 
-            Assert.Equal(oldestEmployee, youngestEmployee);
+            Assert.Equal(oldestEmployeeAge, youngestEmployeeAge);
         }
 
         [Fact]
