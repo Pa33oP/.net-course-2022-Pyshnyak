@@ -3,53 +3,95 @@ using Services;
 using Services.Exceptions;
 using Models;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ServiceTests
 {
     public class EmployeeServiceTests
     {
+        //[Fact]
+        //public void EmployeeAgeExceptionsTest()
+        //{
+        //    //Arrange
+        //    EmployeeService employeeService = new EmployeeService();
+        //    TestDataGenerator testDataGenerator = new TestDataGenerator();
+
+        //    var employeeList = testDataGenerator.GenerateEmployeeList();
+        //    var employee = new Employee()
+        //    {
+        //        FirstName = "Екатерина",
+        //        SureName = "Романова",
+        //        PassportId = 851611,
+        //        Date = new DateTime(2007, 04, 05),
+        //        Salary = 6100
+        //    };
+
+        //    //Act
+        //    //Assert
+        //    Assert.Throws<AgeLimitException>(() => employeeService.AddEmployee(employee));
+        //}
+
+        //[Fact]
+        //public void EmployeePassportExceptionsTest()
+        //{
+        //    //Arrange
+        //    EmployeeService employeeService = new EmployeeService();
+        //    TestDataGenerator testDataGenerator = new TestDataGenerator();
+
+        //    var employeeList = testDataGenerator.GenerateEmployeeList();
+        //    var employee = new Employee()
+        //    {
+        //        FirstName = "Екатерина",
+        //        SureName = "Романова",
+        //        PassportId = 0,
+        //        Date = new DateTime(2002, 04, 05),
+        //        Salary = 6100
+        //    };
+
+        //    //Act
+        //    //Assert
+        //    Assert.Throws<PassportIdException>(() => employeeService.AddEmployee(employee));
+        //}
+
         [Fact]
-        public void EmployeeAgeExceptionsTest()
+        public void TestEmployeesAges()
         {
-            //Arrange
-            EmployeeService employeeService = new EmployeeService();
+            var employeeStorage = new EmployeeStorage();
+            var employeeService = new EmployeeService(employeeStorage);
             TestDataGenerator testDataGenerator = new TestDataGenerator();
+            List<Employee> employees = testDataGenerator.GenerateEmployeeList();
 
-            var employeeList = testDataGenerator.GenerateEmployeeList();
-            var employee = new Employee()
+            foreach (Employee employee in employees)
             {
-                FirstName = "Екатерина",
-                SureName = "Романова",
-                PassportId = 851611,
-                Date = new DateTime(2007, 04, 05),
-                Salary = 6100
-            };
+                employeeService.AddEmployee(employee);
+            }
 
-            //Act
-            //Assert
-            Assert.Throws<AgeLimitException>(() => employeeService.AddEmployee(employee));
+            var youngestEmployeeDate = employeeService.GetEmployees().Max(u => u.Date);
+            int youngestEmployeeAge = DateTime.Now.Year - youngestEmployeeDate.Year;
+
+            var oldestEmployeeDate = employeeService.GetEmployees().Min(u => u.Date);
+            int oldestEmployeeAge = DateTime.Now.Year - oldestEmployeeDate.Year;
+
+            Assert.Equal(oldestEmployeeAge, youngestEmployeeAge);
         }
 
         [Fact]
-        public void EmployeePassportExceptionsTest()
+        public void TestEmployeesAvarageAge()
         {
-            //Arrange
-            EmployeeService employeeService = new EmployeeService();
+            var employeeStorage = new EmployeeStorage();
+            var employeeService = new EmployeeService(employeeStorage);
             TestDataGenerator testDataGenerator = new TestDataGenerator();
+            List<Employee> employees = testDataGenerator.GenerateEmployeeList();
 
-            var employeeList = testDataGenerator.GenerateEmployeeList();
-            var employee = new Employee()
+            foreach (Employee employee in employees)
             {
-                FirstName = "Екатерина",
-                SureName = "Романова",
-                PassportId = 0,
-                Date = new DateTime(2002, 04, 05),
-                Salary = 6100
-            };
+                employeeService.AddEmployee(employee);
+            }
 
-            //Act
-            //Assert
-            Assert.Throws<PassportIdException>(() => employeeService.AddEmployee(employee));
+            var avarageEmployeesAge = (int)employeeService.GetEmployees().Average(u => DateTime.Today.Year - u.Date.Year);
+
+            Assert.True(avarageEmployeesAge > 0);
         }
     }
 }

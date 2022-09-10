@@ -3,53 +3,95 @@ using Services.Exceptions;
 using Services;
 using Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceTests
 {
     public class ClientServiceTests
     {
-        [Fact]
-        public void ClientAgeExceptionsTest()
-        {
-            //Arrange
-            var clientService = new ClientService();
-            var testDataGenerator = new TestDataGenerator();
+        //[Fact]
+        //public void ClientAgeExceptionsTest()
+        //{
+        //    //Arrange
+        //    var clientService = new ClientService();
+        //    var testDataGenerator = new TestDataGenerator();
 
-            var clientAccountsList = testDataGenerator.GenerateClientAccounts();
-            var client = new Client()
+        //    var clientAccountsList = testDataGenerator.GenerateClientAccounts();
+        //    var client = new Client()
+        //    {
+        //        FirstName = "Mike",
+        //        SureName = "Reiner",
+        //        PassportId = 851611,
+        //        Date = new DateTime(2008, 05, 05),
+        //        PhoneNumber = "77957422"
+        //    };
+
+        //    //Act
+        //    //Assert
+        //    Assert.Throws<AgeLimitException>(() => clientService.AddClient(client));
+        //}
+
+        //[Fact]
+        //public void ClientPassportExceptionsTest()
+        //{
+        //    //Arrange
+        //    var clientService = new ClientService();
+        //    var testDataGenerator = new TestDataGenerator();
+
+        //    var clientAccountsList = testDataGenerator.GenerateClientAccounts();
+        //    var client = new Client()
+        //    {
+        //        FirstName = "Mike",
+        //        SureName = "Reiner",
+        //        PassportId = 0,
+        //        Date = new DateTime(2003, 05, 05),
+        //        PhoneNumber = "77957422"
+        //    };
+
+        //    //Act
+        //    //Assert
+        //    Assert.Throws<PassportIdException>(() => clientService.AddClient(client));
+        //}
+
+        [Fact]
+        public void TestClientAges()
+        {
+            var clientStorage = new ClientStorage();
+            var clientService = new ClientService(clientStorage);
+            TestDataGenerator testDataGenerator = new TestDataGenerator();
+            List<Client> clients = testDataGenerator.GenerateClientList();
+
+            foreach (Client client in clients)
             {
-                FirstName = "Mike",
-                SureName = "Reiner",
-                PassportId = 851611,
-                Date = new DateTime(2008, 05, 05),
-                PhoneNumber = "77957422"
-            };
-            
-            //Act
-            //Assert
-            Assert.Throws<AgeLimitException>(() => clientService.AddClient(client));
+                clientService.AddClient(client);
+            }
+
+            var youngestClientDate = clientService.GetClients().Max(u => u.Key.Date);
+            int youngestClientAge = DateTime.Now.Year - youngestClientDate.Year;
+
+            var oldestClientDate = clientService.GetClients().Min(u => u.Key.Date);
+            int oldestClientAge = DateTime.Now.Year - oldestClientDate.Year;
+
+            Assert.Equal(oldestClientAge, youngestClientAge);
         }
 
         [Fact]
-        public void ClientPassportExceptionsTest()
+        public void TestClientsAvarageAge()
         {
-            //Arrange
-            var clientService = new ClientService();
-            var testDataGenerator = new TestDataGenerator();
+            var clientStorage = new ClientStorage();
+            var clientService = new ClientService(clientStorage);
+            TestDataGenerator testDataGenerator = new TestDataGenerator();
+            List<Client> clients = testDataGenerator.GenerateClientList();
 
-            var clientAccountsList = testDataGenerator.GenerateClientAccounts();
-            var client = new Client()
+            foreach (Client client in clients)
             {
-                FirstName = "Mike",
-                SureName = "Reiner",
-                PassportId = 0,
-                Date = new DateTime(2003, 05, 05),
-                PhoneNumber = "77957422"
-            };
+                clientService.AddClient(client);
+            }
 
-            //Act
-            //Assert
-            Assert.Throws<PassportIdException>(() => clientService.AddClient(client));
+            var avarageAgeClients = (int)clientService.GetClients().Average(u => DateTime.Today.Year - u.Key.Date.Year);
+
+            Assert.True(avarageAgeClients > 0);
         }
     }
 }
