@@ -12,7 +12,7 @@ namespace Services
             .RuleFor(u => u.SureName, f => f.Person.LastName)
             .RuleFor(u => u.PassportId, f => f.Random.Int(111111, 999999))
             .RuleFor(u => u.Date, f => f.Date.Between(new DateTime(1990, 01, 01),new DateTime(1999, 01, 01)))
-            .RuleFor(u => u.PhoneNumber, f => f.Phone.PhoneNumber("##"));
+            .RuleFor(u => u.PhoneNumber, f => f.Phone.PhoneNumber("########"));
 
         private Faker<Employee> fakeEmployees = new Faker<Employee>("ru")
             .RuleFor(e => e.FirstName, f => f.Person.FirstName)
